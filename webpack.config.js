@@ -67,6 +67,9 @@ function getHtmlPlugins(chunks) {
 				chunks: [chunk],
 				template: "public/index.html",
 				favicon: "public/favicon.ico",
+				templateParameters: {
+					PUBLIC_URL: process.env.PUBLIC_URL || "",
+				},
 			})
 	);
 }
