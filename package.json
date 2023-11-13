@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "restricted"
 	},
-	"version": "1.00.07",
+	"version": "1.00.1",
 	"keywords": [
 		"react",
 		"create-react-app",
@@ -25,7 +25,11 @@
 		"url": "https://github.com/bwz3rbot/cra-template-chrome-extension/issues"
 	},
 	"files": [
-		"template",
-		"template.json"
+		"template.json",
+		"template/**/*",
+		"!template/dist",
+		"!template/node_modules",
+		"!template/package-lock.json",
+		"!template/.env"
 	]
 }
