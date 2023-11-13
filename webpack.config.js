@@ -1,6 +1,7 @@
 const path = require("path");
 const HTMLPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+
 const webpack = require("webpack");
 module.exports = {
 	entry: {
@@ -8,6 +9,7 @@ module.exports = {
 	},
 	devServer: {
 		port: 3000,
+		open: true,
 		liveReload: true,
 		client: {
 			overlay: {
@@ -17,7 +19,7 @@ module.exports = {
 			},
 		},
 	},
-	mode: "production",
+	mode: process.env.NODE_ENV || "development",
 	module: {
 		rules: [
 			{
@@ -43,7 +45,7 @@ module.exports = {
 				{ from: "manifest.json", to: "../manifest.json" },
 				{
 					from: "public/assets",
-					to: "assets",
+					to: "../assets",
 				},
 			],
 			options: {
