@@ -1,6 +1,9 @@
 {
-	"name": "cra-template-chrome-extension",
-	"version": "1.2.0",
+	"name": "@bingobangobotto/cra-template-chrome-extension",
+	"publishConfig": {
+		"access": "restricted"
+	},
+	"version": "1.00.05",
 	"keywords": [
 		"react",
 		"create-react-app",
@@ -23,7 +26,6 @@
 	},
 	"files": [
 		"template",
-		"template.json",
-		"./template/package.json"
+		"template.json"
 	]
 }

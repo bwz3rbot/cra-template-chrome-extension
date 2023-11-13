@@ -1,5 +1,6 @@
 {
 	"package": {
+		"template": "cra-template-chrome-extension",
 		"dependencies": {
 			"eslint-plugin-jsx-a11y": "^6.2.3",
 			"serve": "^11.2.0"
@@ -11,6 +12,15 @@
 		"eslintConfig": {
 			"extends": ["react-app", "plugin:jsx-a11y/recommended"],
 			"plugins": ["jsx-a11y"]
-		}
+		},
+		"files": [
+			"public",
+			"src",
+			"manifest.json",
+			"package.json",
+			"README.md",
+			"tsconfig.json",
+			"webpack.config.js"
+		]
 	}
 }
