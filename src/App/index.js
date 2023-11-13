@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import Hello from "@/Component/Hello";
+
 export default function App() {
 	return (
 		<Box
@@ -13,6 +14,7 @@ export default function App() {
 			}}
 		>
 			<Hello />
+			<img src="/assets/logo192.png" alt="logo" />
 		</Box>
 	);
 }

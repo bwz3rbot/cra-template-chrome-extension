@@ -39,9 +39,27 @@ module.exports = {
 	},
 	plugins: [
 		new CopyPlugin({
-			patterns: [{ from: "manifest.json", to: "../manifest.json" }],
+			patterns: [
+				{ from: "manifest.json", to: "../manifest.json" },
+				{
+					from: "public/assets",
+					to: "assets",
+				},
+			],
+			options: {
+				concurrency: 100,
+			},
 		}),
-		...getHtmlPlugins(["index"]),
+		new HTMLPlugin({
+			title: "React extension",
+			filename: `index.html`,
+			chunks: ["index"],
+			template: "public/index.html",
+
+			templateParameters: {
+				PUBLIC_URL: process.env.PUBLIC_URL || "",
+			},
+		}),
 		new webpack.ProvidePlugin({
 			React: "react",
 		}),
@@ -57,19 +75,3 @@ module.exports = {
 		filename: "[name].js",
 	},
 };
-
-function getHtmlPlugins(chunks) {
-	return chunks.map(
-		chunk =>
-			new HTMLPlugin({
-				title: "React extension",
-				filename: `${chunk}.html`,
-				chunks: [chunk],
-				template: "public/index.html",
-				favicon: "public/favicon.ico",
-				templateParameters: {
-					PUBLIC_URL: process.env.PUBLIC_URL || "",
-				},
-			})
-	);
-}
