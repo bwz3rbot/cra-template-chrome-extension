@@ -1,8 +1,11 @@
 const path = require("path");
 const HTMLPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const ExtReloader = require("webpack-ext-reloader");
 
 const webpack = require("webpack");
+
+const port = process.env.PORT || 3000;
 module.exports = {
 	entry: {
 		options: "./src/Page/Options/index.js",
@@ -10,10 +13,11 @@ module.exports = {
 		background: "./src/Script/Background/index.js",
 		content: "./src/Script/Content/index.js",
 	},
+	mode: "development", // this is overriden by the --mode flag in the npm build script
+	devtool: "source-map", // this is required to run the extension in dev mode, if removed it uses eval() which is not allowed by the chrome extension manifest
 	devServer: {
-		port: 3000,
+		port,
 		open: true,
-		liveReload: true,
 		client: {
 			overlay: {
 				errors: true,
@@ -22,7 +26,6 @@ module.exports = {
 			},
 		},
 	},
-	mode: "development",
 	module: {
 		rules: [
 			{
@@ -72,6 +75,14 @@ module.exports = {
 		}),
 		new webpack.ProvidePlugin({
 			React: "react",
+		}),
+		new ExtReloader({
+			port,
+			entries: {
+				contentScript: "content",
+				background: "background",
+				extensionPage: ["options", "popup"],
+			},
 		}),
 	],
 	resolve: {

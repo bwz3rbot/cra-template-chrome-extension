@@ -13,14 +13,14 @@ React and MaterialUI.
 
 Use this command to develop your extension. Webpack will watch the nececary
 directories for any changes and automatically build the project with updated
-files. Simply reload the extension via chrome://extensions to see the changes.
+files. webpack-ext-reloader is installed and configured to automatically refresh
+the extension on changes - no need to manually reload from chrome://extensions
 
 ```
 > npm build
 ```
 
-This command builds a distribution suitable for installing on Chrome browser as
-an extension.
+This command builds a production distributable ready to install in Chrome.
 
 ```
 > npm test
@@ -58,14 +58,16 @@ within the code as such:
 -   @Context - `src/Context/`
 
 ---
-# Ready-to-use Contexts
+
+# Ready-to-use Hooks And Contexts
 
 -   StorageContext
 
     -   `useValueStore`
 
     -   A hook to interact with the chrome storage api.
-    -   Use it in your code just like you would useState and the value persists between sessions.
+    -   Use it in your code just like you would useState and the value persists
+        between sessions.
     -   Takes in a storage key and a default value.
     -   Returns the value, a setter function, loading (true/false) and an error
         message if exists

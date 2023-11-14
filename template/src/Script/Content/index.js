@@ -1,7 +1,9 @@
 // send message to the background script
-chrome.runtime.sendMessage(
-	{ message: "hello from content script" },
-	function (response) {
-		console.log(response.message);
-	}
-);
+
+(async () => {
+	const res = await chrome.runtime.sendMessage({
+		message: "Sent message from content script",
+	});
+
+	console.log("got response from background script", res);
+})();
