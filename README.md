@@ -25,30 +25,33 @@ Run this command to quickstart the project from your terminal.
 ```
 > npx create-react-app my-chrome-extension --template @bingobangobotto/cra-template-chrome-extension
 ```
+
 ---
+
 # Commands:
+
+<!-- prettier-ignore -->
+Use this command to develop your extension. Webpack will watch the nececary directories for any changes and automatically build the project with updated files.
+
+<!-- prettier-ignore -->
+webpack-ext-reloader is installed and configured to automatically refresh the extension on changes - no need to manually reload from chrome://extensions
 
 ```
 > npm watch
 ```
 
-<!-- prettier-ignore -->
-Use this command to develop your extension. Webpack will watch the nececary directories for any changes and automatically build the project with updated files.
-<!-- prettier-ignore -->
-webpack-ext-reloader is installed and configured to automatically refresh the extension on changes - no need to manually reload from chrome://extensions
+This command builds a production distributable ready to install in Chrome.
 
 ```
 > npm build
 ```
 
-This command builds a production distributable ready to install in Chrome.
+<!-- prettier-ignore -->
+Only use this command to test your app in the browser. It will serve all the files from the public directory.
 
 ```
 > npm test
 ```
-
-<!-- prettier-ignore -->
-Only use this command to test your app in the browser. It will serve all the files from the public directory.
 
 ---
 
