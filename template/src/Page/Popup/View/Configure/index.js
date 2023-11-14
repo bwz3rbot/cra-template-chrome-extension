@@ -1,29 +1,18 @@
-import {
-	Box,
-	Typography,
-	TextField,
-	Button,
-	OutlinedInput,
-} from "@mui/material";
+import { IconButton, Box, Button, OutlinedInput } from "@mui/material";
 import Heading from "@Component/Heading";
-import { useStoredValue } from "@/Context/Storage";
+import { useValueStore } from "@/Context/Storage";
+import ClearIcon from "@mui/icons-material/Clear";
 export default function ConfigureView() {
-	const [name, set, { state }] = useStoredValue("name");
-	let message;
-	if (name) {
-		message = `Hello, ${name}!`;
-	} else {
-		message = "What should I call you?";
-	}
+	const [name, setName, { state, error }] = useValueStore("name");
+	let message = "What should I call you?";
+	if (name) message = `Hello, ${name}!`;
 	return (
 		<Box>
-			<Heading text="Configure View" />
-
-			<Typography>{message}</Typography>
+			<Heading text={message} />
 			<form
 				onSubmit={e => {
 					e.preventDefault();
-					set(e.target.name.value);
+					setName(e.target.name.value);
 				}}
 			>
 				<OutlinedInput
@@ -32,14 +21,9 @@ export default function ConfigureView() {
 					name="name"
 					defaultValue={name}
 					endAdornment={
-						<Button
-							variant="contained"
-							onClick={() => {
-								set(null);
-							}}
-						>
-							clear
-						</Button>
+						<IconButton onClick={() => setName(null)}>
+							<ClearIcon />
+						</IconButton>
 					}
 				/>
 			</form>

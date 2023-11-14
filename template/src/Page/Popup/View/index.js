@@ -3,14 +3,14 @@ import ViewBox from "@Component/Viewbox";
 
 import HomeView from "@PopupPage/View/Home";
 import ConfigureView from "@PopupPage/View/Configure";
-import { useStoredValue } from "@/Context/Storage";
+import { useValueStore } from "@/Context/Storage";
 export default function View() {
-	const [onTab, setOnTab, { state }] = useStoredValue(
+	const [onTab, setOnTab, { loading, error }] = useValueStore(
 		"popup-on-view",
 		"Home"
 	);
 
-	if (state === "loading") return;
+	if (loading) return;
 	return (
 		<Box
 			sx={{

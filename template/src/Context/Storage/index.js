@@ -2,13 +2,15 @@ import { createContext, useContext, useEffect, useState } from "react";
 const Context = createContext({
 	get: async key => {},
 	set: async (key, value) => {},
+	clearStore: async () => {},
 });
 export const useStorage = () => useContext(Context);
-export const useStoredValue = (key, defaultValue = null) => {
+export const useValueStore = (key, defaultValue = null) => {
 	const { get, set } = useStorage();
 
-	const [{ state, value: val }, setState] = useState({
-		state: "loading",
+	const [{ loading, error, value }, setState] = useState({
+		loading: true,
+		error: null,
 		value: defaultValue,
 	});
 
@@ -16,19 +18,19 @@ export const useStoredValue = (key, defaultValue = null) => {
 		get(key).then(({ error, value }) => {
 			if (error) {
 				console.error(error);
-				setState({ state: "error", value: defaultValue });
+				setState({ loading: false, error, value: null });
 			} else {
-				setState({ state: "loaded", value: value || defaultValue });
+				setState({ loading: false, error: null, value });
 			}
 		});
 	}, [key, get]);
 
-	const setVal = async value => {
+	const setValue = async value => {
 		await set(key, value);
-		setState({ state: "loaded", value });
+		setState({ state: "ready", value });
 	};
 
-	return [val, setVal, { state }];
+	return [value, setValue, { loading, error }];
 };
 
 const chromeStorage = {
@@ -49,6 +51,28 @@ const chromeStorage = {
 	set: async (key, value) => {
 		return new Promise((resolve, reject) => {
 			chrome.storage.local.set({ [key]: value }, () => {
+				if (chrome.runtime.lastError) {
+					reject(chrome.runtime.lastError);
+				} else {
+					resolve();
+				}
+			});
+		});
+	},
+	delete: async key => {
+		return new Promise((resolve, reject) => {
+			chrome.storage.local.remove(key, () => {
+				if (chrome.runtime.lastError) {
+					reject(chrome.runtime.lastError);
+				} else {
+					resolve();
+				}
+			});
+		});
+	},
+	clear: async () => {
+		return new Promise((resolve, reject) => {
+			chrome.storage.local.clear(() => {
 				if (chrome.runtime.lastError) {
 					reject(chrome.runtime.lastError);
 				} else {
@@ -82,20 +106,22 @@ const localStorage = {
 			}
 		});
 	},
+	clear: async () => {
+		return new Promise((resolve, reject) => {
+			try {
+				window.localStorage.clear();
+				resolve();
+			} catch (e) {
+				reject(e);
+			}
+		});
+	},
 };
+const isChromeAvailable = typeof chrome !== "undefined" && chrome.storage;
 export default function StorageContext({ children }) {
-	// is chrome storage available?
-
-	let provider;
-	if (typeof chrome !== "undefined" && chrome.storage) {
-		provider = "chrome";
-	} else {
-		provider = "local";
-	}
-
 	return (
 		<Context.Provider
-			value={provider === "chrome" ? chromeStorage : localStorage}
+			value={isChromeAvailable ? chromeStorage : localStorage}
 		>
 			{children}
 		</Context.Provider>
