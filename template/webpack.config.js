@@ -5,7 +5,10 @@ const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
 module.exports = {
 	entry: {
-		index: "./src/index.js",
+		options: "./src/Page/Options/index.js",
+		popup: "./src/Page/Popup/index.js",
+		background: "./src/Script/Background/index.js",
+		content: "./src/Script/Content/index.js",
 	},
 	devServer: {
 		port: 3000,
@@ -42,25 +45,30 @@ module.exports = {
 	plugins: [
 		new CopyPlugin({
 			patterns: [
-				{ from: "manifest.json", to: "../manifest.json" },
+				{ from: "manifest.json", to: path.join(__dirname, "dist") },
 				{
-					from: "public/assets",
-					to: "../assets",
+					from: "public",
+					to: path.join(__dirname, "dist"),
+					globOptions: {
+						ignore: ["**/options.html", "**/popup.html"],
+					},
 				},
 			],
 			options: {
 				concurrency: 100,
 			},
 		}),
-		new HTMLPlugin({
-			title: "React extension",
-			filename: `index.html`,
-			chunks: ["index"],
-			template: "public/index.html",
-
-			templateParameters: {
-				PUBLIC_URL: process.env.PUBLIC_URL || "",
-			},
+		...["options", "popup"].map(name => {
+			return new HTMLPlugin({
+				title: `${name} page`,
+				filename: `${name}.html`,
+				chunks: [name],
+				template: `public/${name}.html`,
+				minify: true,
+				templateParameters: {
+					PUBLIC_URL: process.env.PUBLIC_URL || "",
+				},
+			});
 		}),
 		new webpack.ProvidePlugin({
 			React: "react",
@@ -73,7 +81,14 @@ module.exports = {
 		},
 	},
 	output: {
-		path: path.join(__dirname, "dist/js"),
-		filename: "[name].js",
+		path: path.join(__dirname, "dist"),
+		// include full folder path
+		filename: pathData => {
+			if (["background", "content"].includes(pathData.chunk.name)) {
+				return `bundle/script/${pathData.chunk.name}.js`;
+			} else {
+				return `bundle/page/${pathData.chunk.name}.js`;
+			}
+		},
 	},
 };

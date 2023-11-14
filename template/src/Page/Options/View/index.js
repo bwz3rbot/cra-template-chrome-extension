@@ -1,7 +1,6 @@
-import { Box } from "@mui/material";
-import Hello from "@/Component/Hello";
+import { Box, Typography } from "@mui/material";
 
-export default function App() {
+export default function View() {
 	return (
 		<Box
 			sx={{
@@ -15,7 +14,7 @@ export default function App() {
 			}}
 		>
 			<img src="/assets/logo192.png" alt="logo" />
-			<Hello />
+			<Typography variant="h1">Options View</Typography>
 		</Box>
 	);
 }

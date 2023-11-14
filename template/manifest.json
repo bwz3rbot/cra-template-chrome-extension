@@ -8,9 +8,22 @@
 		"48": "assets/logo192.png",
 		"128": "assets/logo192.png"
 	},
+	"options_ui": {
+		"page": "options.html",
+		"open_in_tab": true
+	},
 	"action": {
 		"default_title": "React Chrome Extension",
 		"default_icon": "assets/logo192.png",
-		"default_popup": "js/index.html"
-	}
+		"default_popup": "popup.html"
+	},
+	"background": {
+		"service_worker": "bundle/script/background.js"
+	},
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["bundle/script/content.js"]
+		}
+	]
 }
