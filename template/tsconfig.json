@@ -2,7 +2,15 @@
 	"compilerOptions": {
 		"baseUrl": "./src",
 		"paths": {
-			"@/*": ["*"]
+			"@/*": ["*"],
+			"@PopupPage/*": ["Page/Popup/*"],
+			"@OptionsPage/*": ["Page/Options/*"],
+			"@BackgroundScript/*": ["Script/Background/*"],
+			"@ContentScript/*": ["Script/Content/*"],
+			"@Component/*": ["Component/*"],
+			"@Hook/*": ["Hook/*"],
+			"@Util/*": ["Util/*"],
+			"@Context/*": ["Context/*"]
 		},
 		"target": "es5",
 		"lib": ["dom", "dom.iterable", "esnext"],

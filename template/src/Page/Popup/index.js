@@ -1,11 +1,14 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import View from "@/Page/Popup/View";
+import Theme from "@/Context/Theme";
+import StorageContext from "@/Context/Storage";
+import View from "@PopupPage/View";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-	<React.StrictMode>
-		<View />
-	</React.StrictMode>
+	<Theme>
+		<StorageContext>
+			<View />
+		</StorageContext>
+	</Theme>
 );

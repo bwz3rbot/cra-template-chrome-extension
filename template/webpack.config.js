@@ -78,6 +78,17 @@ module.exports = {
 		extensions: [".tsx", ".ts", ".js"],
 		alias: {
 			"@": path.resolve(__dirname, "src/"),
+			"@PopupPage": path.resolve(__dirname, "src/Page/Popup/"),
+			"@OptionsPage": path.resolve(__dirname, "src/Page/Options/"),
+			"@BackgroundScript": path.resolve(
+				__dirname,
+				"src/Script/Background/"
+			),
+			"@ContentScript": path.resolve(__dirname, "src/Script/Content/"),
+			"@Component": path.resolve(__dirname, "src/Component/"),
+			"@Hook": path.resolve(__dirname, "src/Hook/"),
+			"@Util": path.resolve(__dirname, "src/Util/"),
+			"@Context": path.resolve(__dirname, "src/Context/"),
 		},
 	},
 	output: {
