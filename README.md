@@ -13,22 +13,29 @@
 [![NPM Downloads](https://img.shields.io/npm/dt/@bingobangobotto/cra-template-chrome-extension.svg)](https://www.npmjs.com/package/@bingobangobotto/cra-template-chrome-extension)
 
 </div>
-
-Use this cra template to quick-start your Chrome Extension development with
-React and MaterialUI.
+<!-- prettier-ignore -->
+Use this cra template to quick-start your Chrome Extension development with React and MaterialUI.
 
 ---
 
+# Getting Started
+
+Run this command to quickstart the project from your terminal.
+
+```
+> npx create-react-app my-chrome-extension --template @bingobangobotto/cra-template-chrome-extension
+```
+---
 # Commands:
 
 ```
 > npm watch
 ```
 
-Use this command to develop your extension. Webpack will watch the nececary
-directories for any changes and automatically build the project with updated
-files. webpack-ext-reloader is installed and configured to automatically refresh
-the extension on changes - no need to manually reload from chrome://extensions
+<!-- prettier-ignore -->
+Use this command to develop your extension. Webpack will watch the nececary directories for any changes and automatically build the project with updated files.
+<!-- prettier-ignore -->
+webpack-ext-reloader is installed and configured to automatically refresh the extension on changes - no need to manually reload from chrome://extensions
 
 ```
 > npm build
@@ -40,8 +47,8 @@ This command builds a production distributable ready to install in Chrome.
 > npm test
 ```
 
-Only use this command to test your app in the browser. It will serve all the
-files from the public directory.
+<!-- prettier-ignore -->
+Only use this command to test your app in the browser. It will serve all the files from the public directory.
 
 ---
 
@@ -58,8 +65,8 @@ files from the public directory.
 
 # Import Aliases
 
-Import aliases are pre-configured. Any imports can be conveniently referenced
-within the code as such:
+<!-- prettier-ignore -->
+Import aliases are pre-configured. Any imports can be conveniently referenced within the code as such:
 
 -   @ - `src/`
 -   @PopupPage - `src/Page/Popup/`
