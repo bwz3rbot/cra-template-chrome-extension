@@ -37,13 +37,13 @@ Use this command to develop your extension. Webpack will watch the nececary dire
 webpack-ext-reloader is installed and configured to automatically refresh the extension on changes - no need to manually reload from chrome://extensions
 
 ```
-> npm watch
+> npm run watch
 ```
 
 This command builds a production distributable ready to install in Chrome.
 
 ```
-> npm build
+> npm run build
 ```
 
 <!-- prettier-ignore -->
@@ -97,7 +97,7 @@ Import aliases are pre-configured. Any imports can be conveniently referenced wi
         message if exists
 
 ```javascript
-import { useStoredValue } from "@/Context/Storage";
+import { useValueStore } from "@/Context/Storage";
 export default function ConfigureView() {
 	const [name, setName, { loading, error }] = useValueStore("name", null);
 	let message = "What should I call you?";
