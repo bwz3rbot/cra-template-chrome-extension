@@ -1,9 +1,9 @@
 {
 	"name": "@bingobangobotto/cra-template-chrome-extension",
 	"publishConfig": {
-		"access": "restricted"
+		"access": "public"
 	},
-	"version": "1.01.03",
+	"version": "1.01.04",
 	"keywords": [
 		"react",
 		"create-react-app",
