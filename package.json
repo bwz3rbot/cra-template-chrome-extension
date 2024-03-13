@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "restricted"
 	},
-	"version": "1.00.22",
+	"version": "1.01.00",
 	"keywords": [
 		"react",
 		"create-react-app",
